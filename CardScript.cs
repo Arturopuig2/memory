@@ -9,12 +9,6 @@ public class CardScript : MonoBehaviour
     //public Vector3 posicion;
     //public Vector3 rotacion;
 
-    //    public Sprite ImagenCarta()
-    //{
-    //    return imagen;
-    //}
-
-
     // Start is called before the first frame update
     void Start()
     {
@@ -37,6 +31,4 @@ public class CardScript : MonoBehaviour
     {
         Debug.Log("He hecho clic en la carta "+name);
     }
-
-
 }
