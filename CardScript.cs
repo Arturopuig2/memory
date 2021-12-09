@@ -6,6 +6,7 @@ public class CardScript : MonoBehaviour
 {
 
     public Sprite imagen;
+    public Sprite anverso;
     //public Vector3 posicion;
     //public Vector3 rotacion;
 
@@ -30,5 +31,17 @@ public class CardScript : MonoBehaviour
     private void OnMouseDown()
     {
         Debug.Log("He hecho clic en la carta "+name);
+
+        if (GetComponent<SpriteRenderer>().sprite.Equals(imagen))
+        {
+            GetComponent<SpriteRenderer>().sprite = anverso;
+        }
+        else
+        {
+            GetComponent<SpriteRenderer>().sprite = imagen;
+
+        }
+
+
     }
 }
