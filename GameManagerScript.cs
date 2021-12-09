@@ -11,6 +11,24 @@ public class GameManagerScript : MonoBehaviour
     public int columnas = 5;
     public int columnasAsignadas = 0;
     public int filasAsignadas = 0;
+    int[] contador = { 0, 0, 0, 0, 0 };
+
+
+    //public void ClicOnCard()
+    //{
+    //    Debug.Log("CARTA");
+    //}
+
+
+
+
+
+
+
+    //LISTA PARA METER LAS IMAGENES DE ANVERSO
+    public List<Sprite> Anversos = new List<Sprite>();
+
+
 
     public void ColocarCartas()
     {
@@ -21,9 +39,31 @@ public class GameManagerScript : MonoBehaviour
         {
             GameObject nueva_carta = Instantiate(MyPrefab, new Vector3(posX,posY, 0), Quaternion.identity);
             nueva_carta.name = "Carta" + i;
+
+
+            //ASIGNAR ANVERSOS
+            bool encontrado = false;
+            int pos = 0;
+
+            while (!encontrado)
+            {
+                pos = Random.Range(0, 5);
+                if (contador[pos] < 2)
+                {
+                    contador[pos] += 1;
+                    encontrado = true;
+                }
+            }
+
+
+            nueva_carta.GetComponent<CardScript>().anverso = Anversos[pos];
+
+
             ListaCartas.Add(nueva_carta);
             posX += 3;
             columnasAsignadas+=1;
+
+
 
             if (columnasAsignadas == columnas)
             {

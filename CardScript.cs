@@ -7,6 +7,7 @@ public class CardScript : MonoBehaviour
 
     public Sprite imagen;
     public Sprite anverso;
+
     //public Vector3 posicion;
     //public Vector3 rotacion;
 
