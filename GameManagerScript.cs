@@ -1,10 +1,14 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManagerScript : MonoBehaviour
 {
     public GameObject MyPrefab;
+
+    int[] tipos = {7,1,0,9,6};
+  
 
     public List<GameObject> ListaCartas = new List<GameObject>();
     public int filas = 2;
@@ -14,20 +18,8 @@ public class GameManagerScript : MonoBehaviour
     int[] contador = { 0, 0, 0, 0, 0 };
 
 
-    //public void ClicOnCard()
-    //{
-    //    Debug.Log("CARTA");
-    //}
-
-
-
-
-
-
-
     //LISTA PARA METER LAS IMAGENES DE ANVERSO
     public List<Sprite> Anversos = new List<Sprite>();
-
 
 
     public void ColocarCartas()
@@ -47,7 +39,7 @@ public class GameManagerScript : MonoBehaviour
 
             while (!encontrado)
             {
-                pos = Random.Range(0, 5);
+                pos = UnityEngine.Random.Range(0, 5);
                 if (contador[pos] < 2)
                 {
                     contador[pos] += 1;
@@ -57,6 +49,7 @@ public class GameManagerScript : MonoBehaviour
 
 
             nueva_carta.GetComponent<CardScript>().anverso = Anversos[pos];
+            nueva_carta.GetComponent<CardScript>().tipo = tipos[pos];
 
 
             ListaCartas.Add(nueva_carta);
@@ -75,6 +68,13 @@ public class GameManagerScript : MonoBehaviour
         }
     }
 
+
+    public void ClicOnCard(int tipo)
+    {
+        Debug.Log("He hecho clic on card de valor "+tipo);
+    }
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -86,4 +86,6 @@ public class GameManagerScript : MonoBehaviour
     {
 
     }
+
+
 }
