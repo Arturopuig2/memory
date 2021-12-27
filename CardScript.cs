@@ -5,13 +5,13 @@ using UnityEngine;
 public class CardScript : MonoBehaviour
 {
 
-    public Sprite imagen;
+    //atributos de la carta
+    public Sprite imagen; //parte ed atrás. 
     public Sprite anverso;
+    public int tipo;
 
     public GameObject myGameManager;
     public GameManagerScript myGameManagerScript;
-
-    public int tipo;
 
     private void Awake()
     {
@@ -27,21 +27,31 @@ public class CardScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+       // DeshabilitarBoxCollider();
     }
 
     private void OnMouseDown()
     {
-        myGameManagerScript.ClicOnCard(tipo);
-
-//        Debug.Log("He hecho clic en la carta "+name);
 
         if (GetComponent<SpriteRenderer>().sprite.Equals(imagen))
         {
             GetComponent<SpriteRenderer>().sprite = anverso;
+            myGameManagerScript.ClicOnCard(gameObject);
         }
-        else
-        {
-            GetComponent<SpriteRenderer>().sprite = imagen;
-        }
+        else { }
     }
+
+    //public void DeshabilitarBoxCollider()
+    //{
+    //    if (myGameManagerScript.dobles.Count==2)
+    //    {
+    //        GetComponent<BoxCollider2D>().enabled = false;
+    //    }
+    //    else if(myGameManagerScript.dobles.Count < 2)
+    //    {
+    //        GetComponent<BoxCollider2D>().enabled = true;
+    //    }
+    //}
+
+
 }
