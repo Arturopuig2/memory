@@ -6,7 +6,7 @@ public class CardScript : MonoBehaviour
 {
 
     //atributos de la carta
-    public Sprite imagen; //parte ed atrás. 
+    public Sprite imagen; //parte de atrás. 
     public Sprite anverso;
     public int tipo;
 
@@ -52,6 +52,5 @@ public class CardScript : MonoBehaviour
     //        GetComponent<BoxCollider2D>().enabled = true;
     //    }
     //}
-
 
 }

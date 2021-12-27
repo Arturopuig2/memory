@@ -8,24 +8,31 @@ public class GameManagerScript : MonoBehaviour
 {
     public GameObject MyPrefab;
 
-    int[] tipos = {7,1,0,9,6};
-  
-    public List<GameObject> ListaCartas = new List<GameObject>();
-
-//    public List<GameObject> cartas = new List<GameObject>();
-
     public int filas = 2;
     public int columnas = 5;
     public int columnasAsignadas = 0;
     public int filasAsignadas = 0;
-    int[] contador = { 0, 0, 0, 0, 0 };
+    public int numParejas = 0;
+
     public GameObject texto;
     public GameObject textoFinal;
-    public int numParejas=0;
     public GameObject botonJugar;
-    
+
+    //ARRAY PARA GUARDAR EL NÚMERO DE CARTAS
+    int[] contador = { 0, 0, 0, 0, 0 };
+
+    //ARRAY CON LOS VALORES DE LAS CARTAS
+    int[] tipos = { 7, 1, 0, 9, 6 };
+
+    //LISTA PARA METER TODAS LAS CARTAS
+    public List<GameObject> ListaCartas = new List<GameObject>();
+
     //LISTA PARA METER LAS IMAGENES DE ANVERSO
     public List<Sprite> Anversos = new List<Sprite>();
+
+    //LISTA PARA METER LAS CARTAS VOLTEADAS
+    public List<GameObject> dobles = new List<GameObject>() { };
+
 
     //MÉTOD PARA COLOCAR LAS CARTAS
     public void ColocarCartas()
@@ -53,7 +60,6 @@ public class GameManagerScript : MonoBehaviour
                 }
             }
 
-
             nueva_carta.GetComponent<CardScript>().anverso = Anversos[pos];
             nueva_carta.GetComponent<CardScript>().tipo = tipos[pos];
 
@@ -75,16 +81,6 @@ public class GameManagerScript : MonoBehaviour
     }
 
     //MÉTOD PARA CUANDO HACES CLIC EN UNA CARTA
-    public List<GameObject> dobles = new List<GameObject>() { };
-
-   // GameObject[] cartas = GameObject.FindGameObjectsWithTag("Carta");
-
-    private void LongitudLista()
-    {
-        Debug.Log(ListaCartas.Count);
-    }
-
-
     public void ClicOnCard(GameObject CardScript)
     {
         Debug.Log("He hecho clic en carta de valor "+ CardScript.GetComponent<CardScript>().tipo);
@@ -100,6 +96,7 @@ public class GameManagerScript : MonoBehaviour
         else { };
     }
 
+    //METOD PARA DESHABILITAR LOS BOXCOLLIDERS DE LAS CARTAS (Y NO PODER CLICAR NINGUNA).
     public void DeshabilitarBoxCollider()
     {
         for (int i = 0; i < ListaCartas.Count; i++)
@@ -108,6 +105,7 @@ public class GameManagerScript : MonoBehaviour
         }
     }
 
+    //METOD PARA HABILITAR LOS BOXCOLLIDERS DE LAS CARTAS (Y PODER CLICARLAS).
     public void HabilitarBoxCollider()
     {
         for (int i = 0; i < ListaCartas.Count; i++)
@@ -117,11 +115,9 @@ public class GameManagerScript : MonoBehaviour
     }
 
 
-
     //METOD PARA COMPROBAR PAREJAS
     public void ComprobarParejas()
     {
-
         if (dobles[0].GetComponent<CardScript>().tipo.Equals(dobles[1].GetComponent<CardScript>().tipo))
             {
             Debug.Log("PAREJA");
@@ -129,7 +125,6 @@ public class GameManagerScript : MonoBehaviour
             texto.GetComponent<Text>().text = "NÚMERO DE PAREJAS: " + numParejas;
             dobles[0].SetActive(false);
             dobles[1].SetActive(false);
-
         }
         else {
             dobles[0].GetComponent<SpriteRenderer>().sprite = MyPrefab.GetComponent<SpriteRenderer>().sprite;
@@ -140,8 +135,6 @@ public class GameManagerScript : MonoBehaviour
 
         HabilitarBoxCollider();
 
-
-
         if (numParejas.Equals(5))
             {
                 textoFinal.GetComponent<Text>().text = "GAME OVER";
@@ -149,16 +142,16 @@ public class GameManagerScript : MonoBehaviour
             }
     }
 
-
+    //METOD PARA LA PAUSA ENTRE DOS CARTAS VOLTEADAS
     IEnumerator WaitAndPrint()
     {
         yield return new WaitForSeconds(1F);
         ComprobarParejas();
     }
 
+    //METOD PARA BOTÓN JUGAR
     public void Jugar()
     {
-
         for (int i = 0; i < 10; i++)
         {
             Destroy(ListaCartas[i]);
@@ -177,20 +170,15 @@ public class GameManagerScript : MonoBehaviour
         botonJugar.SetActive(false);
     }
 
-
     // Start is called before the first frame update
     void Start()
-
     {
         botonJugar.SetActive(false);
         ColocarCartas();
-        LongitudLista();
-
     }
 
     // Update is called once per frame
     void Update()
     {
-
     }
 }
